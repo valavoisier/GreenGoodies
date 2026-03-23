@@ -7,7 +7,6 @@
     <!-- HERO -->
     <section class="hero-section">
         <div class="row g-0">
-
             <!-- Colonne gauche : texte centré verticalement -->
             <div class="col-md-6 d-flex justify-content-center align-items-center hero-left">
                 <div class="hero-text-block d-flex flex-column">
@@ -22,42 +21,102 @@
                     </p>
                 </div>
             </div>
-
-
             <!-- Colonne droite : image -->
             <div class="col-md-6 hero-right hero-image-wrapper">
                 <img src="{{ asset('images/hero.webp') }}" 
                     alt="Image d’accueil" 
                     class="hero-img">
             </div>
-
         </div>
     </section>
 
     {# SECTION PRODUITS #}
-    <section class="products my-5">
-        <h2 class="mb-4">Nos produits</h2>
-
+    <section class="products">
+        <h2 class="section-title">NOS PRODUITS</h2>
         <div class="row g-4">
             {# CARDS PRODUITS #}
+            <div class="card-group">
+                <div class="card">
+                    <!-- Product image-->
+                    <img src="{{ asset('images/products/kit-hygiene-recyclable.webp') }}" class="card-img-top" alt="Kit d'hygiène recyclable">
+                    <div class="card-body text-center">
+                    <!-- Product name-->
+                    <h3 class="card-title">Kit d'hygiène recyclable</h3>
+                    <!-- Product description-->
+                    <p class="card-text">Pour une salle de bain éco-friendly</p>
+                    <!-- Product price-->
+                    <p class="card-text"><small class="gg-price">24.99€</small></p>
+                    </div>
+                    <div class="card-footer text-center">
+                    <a href="#" class="gg-card-link">Voir le produit</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="{{ asset('images/products/shot-tropical.webp') }}" class="card-img-top" alt="Another product">
+                    <div class="card-body">
+                    <h3 class="card-title">Shot Tropical</h3>
+                    <p class="card-text">Fruits frais, pressés à froid</p>
+                    <p class="card-text"><small class="gg-price">4.50€</small></p>
+                    </div>
+                    <div class="card-footer">
+                    <a href="#" class="gg-card-link">Voir le produit</a>
+                    </div>
+                </div>
+                <div class="card">    
+                    <img src="{{ asset('images/products/gourde-bois.webp') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <!-- Product name-->
+                    <h3 class="card-title">Gourde en bois</h3>
+                    <p class="card-text">50cl, bois d'olivier</p>
+                    <p class="card-text"><small class="gg-price">16.90€</small></p>
+                    </div>
+                    <div class="card-footer">
+                    <a href="#" class="gg-card-link">Voir le produit</a>
+                    </div>  
+                </div>
+            </div>
+            
         </div>
     </section>
 
     {# SECTION VALEURS #}
-    <section class="values my-5">
-        <div>        
-            <h2 class="mb-4">NOTRE CONVICTION</h2>
-            <p>
-                Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre mission est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique
-            </p>
+    <section class="values-section">
+        {# BLOC 1 — NOTRE CONVICTION #}
+        <div class="values-block bg-beige d-flex">
+            <div class="col-6 d-flex align-items-end">
+                <div class="values-text-block values-text-left">
+                    <h2 class="section-title">NOTRE CONVICTION</h2>
+                    <p>
+                        Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre mission est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique.
+                    </p>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+               <div class="values-img-wrapper">
+                    <img src="{{ asset('images/convictions.webp') }}" alt="Notre conviction" class="values-img-right">
+                </div>
+            </div>
         </div>
-        <div>
-            <h2 class="mb-4">NOS VALEURS</h2>
-            <p>
-                Durabilité : Nous sélectionnons soigneusement des produits qui respectent l'environnement et favorisent la durabilité.
-                Éthique : Nous nous engageons à travailler avec des partenaires et des fournisseurs qui partagent nos valeurs éthiques.
-                Écologie : Nous encourageons des pratiques respectueuses de l'écosystème et privilégions les matériaux écologiques.
-            </p>
+
+        {# BLOC 2 — NOS VALEURS #}
+        <div class="values-block bg-green d-flex">
+            <div class="col-6 d-flex justify-content-start">
+                <div class="values-img-wrapper">
+                    <img src="{{ asset('images/valeurs.webp') }}" 
+                        alt="Nos valeurs" 
+                        class="values-img-left">
+                </div>
+            </div>
+            <div class="col-6 d-flex align-items-end justify-content-end">
+                <div class="values-text-block values-text-right">
+                    <h2 class="section-title">NOS VALEURS</h2>
+                    <p>
+                        Durabilité : Nous sélectionnons soigneusement des produits qui respectent l'environnement et favorisent la durabilité.<br>
+                        Éthique : Nous nous engageons à travailler avec des partenaires et des fournisseurs qui partagent nos valeurs éthiques.<br>
+                        Écologie : Nous encourageons des pratiques respectueuses de l'écosystème et privilégions les matériaux écologiques.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 

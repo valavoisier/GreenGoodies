@@ -6,10 +6,9 @@ body {
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    padding: 0 24px; 
 }
 
-/* ---------------NAV GreenGoodies--------------------- */
+/* ---------------NAV GreenGoodies (partials)--------------------- */
 .nav-gg {
     background-color: #FFFDF7; 
     height: 81px;             
@@ -38,7 +37,8 @@ body {
 .nav-gg .nav-link:hover {
     color: #000000;
 }
-/* Section hero */
+/* ---------------HOMEPAGE GreenGoodies--------------------- */
+/*_________HERO SECTION_________ */
 .hero-section {
     background-color: #E8F0E3;
     height: 751px;
@@ -48,13 +48,20 @@ body {
     height: 100%;
 }
 
-/* Bloc texte (dimensions Figma) */
+.hero-right {
+    flex: 0 0 calc(50% + 15px); /* 16 px = 0,4 cm */
+}
+
+.hero-left {
+    flex: 0 0 calc(50% - 15px);
+}
+
+/* Bloc left */
 .hero-text-block {
     width: 362px;
     height: 154px;
 }
 
-/* Titre */
 .hero-title {
     font-family: "Inter", sans-serif;
     font-weight: 500;
@@ -64,7 +71,6 @@ body {
     margin-bottom: 32px;
 }
 
-/* Paragraphes */
 .hero-text {
     font-family: "Inter", sans-serif;
     font-weight: 300;
@@ -74,16 +80,7 @@ body {
     margin-bottom: 12px;
 }
 
-.hero-right {
-    flex: 0 0 calc(50% + 18px); /* 18 px = 0,45 cm */
-}
-
-.hero-left {
-    flex: 0 0 calc(50% - 18px);
-}
-
-/* Image */
-
+/* Bloc right */
 .hero-image-wrapper {
     height: 100%;  
     overflow: hidden;   
@@ -91,12 +88,170 @@ body {
 
 .hero-img {    
     width: 100%;
-    height: 100%;
+    height: 106%;
     object-fit: cover;
-    object-position: right bottom; /* garde le bas, recadre le haut */
+    object-position: bottom;
+    transform: scale(1.085);
 }
 
-/*----------------footer------------*/
+/*_________PRODUCT SECTION_________ */
+
+.products .section-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333333;    
+    margin: 35px 0 35px 95px;    
+}
+.card {
+    border-radius: 0;
+    border: none;    
+}
+
+img.card-img-top {
+    width: 480px;
+    height: 474px;
+    object-fit: cover;
+    object-position: center;
+}
+h3.card-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #000000;
+    margin-top: 22px;
+}
+
+p.card-text {
+    font-weight: 400;
+    font-size: 14px;
+    color: #666666;
+    margin-top: 5px;
+}
+
+.card .card-text small.gg-price {
+    color: #333333;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* Taille totale de la card */
+.card {
+    height: 692px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Footer de la card : hauteur fixe, fond identique au body, texte centré */
+.card .card-footer {
+    height: 77px;  
+    background-color: #FFFDF7; 
+    display: flex;
+    border: none;     
+    border-radius: 0;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto; /* pousse le footer en bas si .card est en flex column */
+}
+
+/* Lien dans le footer */
+.card .card-footer a.gg-card-link {
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+    text-decoration: none; 
+}
+
+/* Effet hover sur la div footer */
+.card .card-footer:hover {
+    background-color: #333333;
+}
+.card .card-footer:hover a.gg-card-link {
+    color: #ffffff;
+}
+/*___________SECTION VALEURS_____________*/
+/* SECTION ENTIÈRE */
+.values-section {
+    height: 1292px;
+    width: 100%;
+}
+
+/* BLOCS */
+.values-block {
+    height: 646px;
+}
+
+/* FONDS */
+.bg-beige {
+    background: #EBE3D3;
+}
+
+.bg-green {
+    background: #E8F0E3;
+}
+
+/* ZONE TEXTE*/
+.values-text-block {
+    width: 465px;    
+}
+
+/* marge faible selon le côté */
+.values-text-left {
+    margin-left: 40px;
+    margin-bottom: 20px;
+    max-width: 440px;
+}
+
+.values-text-right {
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+/* IMAGES */
+.values-img-right,
+.values-img-left {
+    width: 487px;
+    height: 646px;
+    object-fit: cover;   
+}
+
+/* Conviction : image un peu plus basse */
+.values-img-right {
+   transform: scale(1.23) translateX(42px) translateY(2px);  
+}
+
+/* Valeurs : image un peu plus haute */
+.values-img-left {
+    transform: scale(1.23) translateX(0px) translateY(-40px); 
+}
+
+.values-img-wrapper {
+    width: 487px;
+    height: 646px;
+    overflow: hidden; /* empêche l’image zoomée de déborder */
+}
+
+/* Alignements*/
+.values-img-right {
+    object-position: left; /* image centrée */
+}
+
+.values-img-left {
+    object-position: center 70%; /* léger bottom */
+}
+
+/* TITRES DE SECTION */
+.section-title {
+    font-size: 20px;
+    font-weight: 500;
+    color:#333333;
+}
+
+/* PARAGRAPHES*/
+.values-text-block p {
+    font-weight: 300;         
+    font-size: 14px;
+    color:#333333;
+}
+/*----------------FOOTER GreenGoodies (Base)------------*/
 .footer-right {
     padding-right: 100px;
 }
