@@ -1,20 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue chez Green Goodies{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {# SECTION BIENVENUE (HERO) #}
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="row g-0">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <!-- Colonne gauche : texte centré verticalement -->
+            <div class="col-md-6 d-flex justify-content-center align-items-center hero-left">
+                <div class="hero-text-block d-flex flex-column">
+                    <h1 class="hero-title">Bienvenue</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>E:/OpenClassrooms/GreenGoodies/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>E:/OpenClassrooms/GreenGoodies/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+                    <p class="hero-text">
+                        Découvrez notre univers de produits durables et éthiques pour une consommation responsable
+                    </p>
+
+                    <p class="hero-text">
+                        Retrouvez des articles d’hygiène & beauté, des accessoires & boissons et du prêt à porter
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Colonne droite : image -->
+            <div class="col-md-6 hero-right hero-image-wrapper">
+                <img src="{{ asset('images/hero.webp') }}" 
+                    alt="Image d’accueil" 
+                    class="hero-img">
+            </div>
+
+        </div>
+    </section>
+
+    {# SECTION PRODUITS #}
+    <section class="products my-5">
+        <h2 class="mb-4">Nos produits</h2>
+
+        <div class="row g-4">
+            {# CARDS PRODUITS #}
+        </div>
+    </section>
+
+    {# SECTION VALEURS #}
+    <section class="values my-5">
+        <div>        
+            <h2 class="mb-4">NOTRE CONVICTION</h2>
+            <p>
+                Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre mission est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique
+            </p>
+        </div>
+        <div>
+            <h2 class="mb-4">NOS VALEURS</h2>
+            <p>
+                Durabilité : Nous sélectionnons soigneusement des produits qui respectent l'environnement et favorisent la durabilité.
+                Éthique : Nous nous engageons à travailler avec des partenaires et des fournisseurs qui partagent nos valeurs éthiques.
+                Écologie : Nous encourageons des pratiques respectueuses de l'écosystème et privilégions les matériaux écologiques.
+            </p>
+        </div>
+    </section>
+
 {% endblock %}
