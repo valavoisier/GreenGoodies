@@ -213,12 +213,11 @@ p.card-text {
     object-fit: cover;   
 }
 
-/* Conviction : image un peu plus basse */
+/* effet zoom + positionnement image */
 .values-img-right {
    transform: scale(1.23) translateX(42px) translateY(2px);  
 }
 
-/* Valeurs : image un peu plus haute */
 .values-img-left {
     transform: scale(1.23) translateX(0px) translateY(-40px); 
 }
@@ -227,15 +226,6 @@ p.card-text {
     width: 487px;
     height: 646px;
     overflow: hidden; /* empêche l’image zoomée de déborder */
-}
-
-/* Alignements*/
-.values-img-right {
-    object-position: left; /* image centrée */
-}
-
-.values-img-left {
-    object-position: center 70%; /* léger bottom */
 }
 
 /* TITRES DE SECTION */
