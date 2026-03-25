@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GreenGoodies{{ product.name }}{% endblock %}
+
+{% block body %}
+    <!-- Product section-->
+     <section class="product-section">
+    <div class="row g-0">
+
+        {# Partie gauche : image zoomée #}
+        <div class="col-auto product-left d-flex align-items-start">
+            <div class="product-img-wrapper">
+                <img 
+                    src="{{ asset('images/products/' ~ product.picture) }}" 
+                    alt="{{ product.name }}" 
+                    class="product-img"
+                >
+            </div>
+        </div>
+
+        {# Partie droite : texte centré horizontalement, bouton en bas #}
+        <div class="col d-flex justify-content-center">
+            <div class="product-right d-flex flex-column">
+
+                <div class="product-text-block">
+                    <h1 class="gg-product-title">{{ product.name }}</h1>
+
+                    <p class="gg-product-price">{{ product.price|number_format(2, '.', ' ') }} €</p>
+
+                    <div class="gg-product-label">Description</div>
+
+                    <p class="gg-product-description">
+                        {{ product.fullDescription|raw }}
+                    </p>
+                </div>
+
+                <div class="mt-auto">
+                    <button class="btn btn-secondary w-100 product-btn">
+                        Ajouter au panier
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

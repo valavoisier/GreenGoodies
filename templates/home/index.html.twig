@@ -32,51 +32,30 @@
 
     {# SECTION PRODUITS #}
     <section class="products">
-        <h2 class="section-title">NOS PRODUITS</h2>
-        <div class="row g-4">
-            {# CARDS PRODUITS #}
+        <h2 id="nos-produits" class="section-title">NOS PRODUITS</h2>
+        {# CARDS PRODUITS — 3 lignes de 3 cards #}
+        <!-- La fonction batch regroupe les card-group par ligne de 3 -->
+        {% for row in products|batch(3) %}
             <div class="card-group">
-                <div class="card">
-                    <!-- Product image-->
-                    <img src="{{ asset('images/products/kit-hygiene-recyclable.webp') }}" class="card-img-top" alt="Kit d'hygiène recyclable">
-                    <div class="card-body text-center">
-                    <!-- Product name-->
-                    <h3 class="card-title">Kit d'hygiène recyclable</h3>
-                    <!-- Product description-->
-                    <p class="card-text">Pour une salle de bain éco-friendly</p>
-                    <!-- Product price-->
-                    <p class="card-text"><small class="gg-price">24.99€</small></p>
+                {% for product in row %}
+                    <div class="card">
+                        <!-- Product image-->
+                        <img src="{{ asset('images/products/' ~ product.picture) }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body text-center">
+                            <!-- Product name-->
+                            <h3 class="card-title">{{ product.name }}</h3>
+                            <!-- Product description-->
+                            <p class="card-text">{{ product.shortDescription }}</p>
+                            <!-- Product price-->
+                            <p class="card-text"><small class="gg-price">{{ product.price|number_format(2, '.', ' ') }}€</small></p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}" class="gg-card-link">Voir le produit</a>
+                        </div>
                     </div>
-                    <div class="card-footer text-center">
-                    <a href="#" class="gg-card-link">Voir le produit</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{{ asset('images/products/shot-tropical.webp') }}" class="card-img-top" alt="Another product">
-                    <div class="card-body text-center">
-                    <h3 class="card-title">Shot Tropical</h3>
-                    <p class="card-text">Fruits frais, pressés à froid</p>
-                    <p class="card-text"><small class="gg-price">4.50€</small></p>
-                    </div>
-                    <div class="card-footer text-center">
-                    <a href="#" class="gg-card-link">Voir le produit</a>
-                    </div>
-                </div>
-                <div class="card">    
-                    <img src="{{ asset('images/products/gourde-bois.webp') }}" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                    <!-- Product name-->
-                    <h3 class="card-title">Gourde en bois</h3>
-                    <p class="card-text">50cl, bois d'olivier</p>
-                    <p class="card-text"><small class="gg-price">16.90€</small></p>
-                    </div>
-                    <div class="card-footer text-center">
-                    <a href="#" class="gg-card-link">Voir le produit</a>
-                    </div>  
-                </div>
+                {% endfor %}
             </div>
-            
-        </div>
+        {% endfor %}
     </section>
 
     {# SECTION VALEURS #}
