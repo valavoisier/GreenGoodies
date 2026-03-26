@@ -26,6 +26,7 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setApiAccess(false);// Par défaut, l'accès à l'API est désactivé pour les nouveaux utilisateurs
 
             $entityManager->persist($user);
             $entityManager->flush();

@@ -20,6 +20,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(message: "L'email est obligatoire.")] 
+    #[Assert\Email(message: "L'adresse email n'est pas valide.")]
     private ?string $email = null;
 
     /**
@@ -32,19 +34,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-     #[Assert\NotBlank(message: 'Veuillez saisir un mot de passe.')]
-    #[Assert\Length(
-        min: 6,
-        minMessage: 'Votre mot de passe doit contenir au moins {{ limit }} caractères.'
-    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez saisir votre prénom.')]
+    #[Assert\Length(
+        min: 2, 
+        max: 255, 
+        minMessage: "Le prénom doit contenir au moins {{ limit }} caractères.", 
+        maxMessage: "Le prénom ne peut pas dépasser {{ limit }} caractères.")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-ZÀ-ÿ\s\-\']+$/u',
+        message: "Le prénom ne peut pas contenir de chiffres ou caractères spéciaux."
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez saisir votre nom.')]
+    #[Assert\Length(
+        min: 2, 
+        max: 255, 
+        minMessage: "Le nom doit contenir au moins {{ limit }} caractères.", 
+        maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères.")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-ZÀ-ÿ\s\-\']+$/u',
+        message: "Le nom ne peut pas contenir de chiffres ou caractères spéciaux."
+    )]
     private ?string $lastName = null;
 
     #[ORM\Column]
