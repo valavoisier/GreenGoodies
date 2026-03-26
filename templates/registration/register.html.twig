@@ -1,19 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="register-wrapper d-flex">
 
-    {{ form_errors(registrationForm) }}
+    <!-- COLONNE GAUCHE FIXE -->
+    <div class="register-left">
+        <img src="{{ asset('images/arbre-the.webp') }}" class="register-image" alt="buisson de feuilles vertes">
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <!-- COLONNE DROITE FLEXIBLE -->
+    <div class="register-right d-flex justify-content-center">
+        <div class="form-container">
+            <h1 class="register-title">Inscription</h1>
+            <p class="register-subtitle">Tous les champs sont obligatoires.</p>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.lastName, {label: 'Nom'}) }}
+                {{ form_row(registrationForm.firstName, {label: 'Prénom'}) }}
+                {{ form_row(registrationForm.email, {label: 'Adresse email'}) }}
+                {{ form_row(registrationForm.plainPassword.first, {label: 'Mot de passe'}) }}
+                {{ form_row(registrationForm.plainPassword.second, {label: 'Confirmation mot de passe'}) }}
+                {{ form_row(registrationForm.agreeTerms, {label: 'J’accepte les CGU de GreenGoodies.'}) }}
+
+                <button class="btn btn-register">S’inscrire</button>
+            {{ form_end(registrationForm) }}
+
+            <p class="register-login-link text-center mt-3">
+                <a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a>
+            </p>
+        </div>
+    </div>
+</div>    
 {% endblock %}
+

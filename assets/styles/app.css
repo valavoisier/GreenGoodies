@@ -11,6 +11,9 @@ body {
     margin: 0 auto;
 }
 
+a {
+    color: #666666;
+}
 /* ---------------NAV GreenGoodies (partials)--------------------- */
 .nav-gg {
     background-color: #FFFDF7; 
@@ -324,7 +327,117 @@ p.card-text {
     font-family: "Inter", sans-serif;
 }
 
+/*----------------REGISTER GreenGoodies------------*/
+
+/* Structure générale */
+.register-wrapper {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+
+/* Colonne gauche fixe */
+.register-left {
+    width: 734px;
+    height: 1104px;
+    overflow: hidden;
+}
+
+.register-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Colonne droite flexible */
+.register-right {
+    flex: 1; /* prend tout l’espace restant */
+    display: flex;
+    justify-content: center; /* centre le formulaire */
+    align-items: flex-start;
+    padding-top: 80px; /* titre à 161px du haut (81px nav + 80px) */
+}
+
+/* Bloc formulaire */
+.form-container {
+    width: 479px; /* largeur exacte Figma */
+}
+
+/* Titres */
+.register-title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #333333;
+}
+
+.register-subtitle {
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 18px;
+}
+
+/* Espacement entre les champs (+10px par rapport au mb-3 Bootstrap) */
+.form-container .mb-3 {
+    margin-bottom: 26px !important; /* 16px (mb-3) + 10px */
+}
+
+/* Labels */
+.form-container label {
+    font-size: 14px;
+    color: #666666;
+}
+
+/* Champs */
+.form-container input:not([type="checkbox"]) {
+    width: 100%;
+    height: 67px !important; 
+    background: #FFFDF7 !important;
+    border: 1px solid #666666 !important;
+    border-radius: 0 !important; /* PAS DE BORDER RADIUS */
+    padding: 0 14px !important;
+    font-size: 14px;
+}
+
+/* Case à cocher CGU */
+.form-container input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    border: 1px solid #666666;
+    border-radius: 0;
+    accent-color: #565656;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+
+
+/* Bouton */
+.btn-register {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%; /* 479 px via form-container */
+    height: 77px; /* hauteur exacte Figma */
+    background-color: #565656 !important;
+    color: white;
+    border-radius: 0 !important; /* PAS DE BORDER RADIUS */
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+}
+
+.btn-register:hover {
+    background-color: #000000 !important;
+}
+
+/* Lien connexion */
+.register-login-link {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+}
+
 /*----------------FOOTER GreenGoodies (Base)------------*/
 .footer-right {
     padding-right: 100px;
+    font-size: 14px;
+    color: #666666;
 }
