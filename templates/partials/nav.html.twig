@@ -18,7 +18,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}#nos-produits" data-turbo="false">Nos produits</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Mon panier</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Mon compte</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Déconnexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
                 {% else %}
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">Inscription</a></li>

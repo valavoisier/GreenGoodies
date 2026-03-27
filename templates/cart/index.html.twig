@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier - greenGoodies{% endblock %}
+
+{% block body %}
+<!-- Cart section-->
+<section class="cart-section d-flex align-items-center">
+    <div class="row g-0">
+        <h1>Mon panier</h1>
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ asset('images/products/placeholder.jpg') }}" class="img-fluid rounded-start" alt="Nom du produit">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom du produit</h5>
+                        <p class="card-text"><small class="text-muted">Quantité: 1</small></p>
+                        <p class="card-text">0.00 €</p>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-total">
+            <h2>Total: 0.00 €</h2>
+            <p class="card-text"><small class="text-muted">Frais de livraison: Offert</small></p>
+        </div>
+            <button class="btn btn-secondary w-100 product-btn">Valider la commande</button>
+    </div>
+</section>
+{% endblock %}

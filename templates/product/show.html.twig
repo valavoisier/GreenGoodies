@@ -3,8 +3,8 @@
 {% block title %}GreenGoodies{{ product.name }}{% endblock %}
 
 {% block body %}
-    <!-- Product section-->
-     <section class="product-section">
+<!-- Product section-->
+<section class="product-section">
     <div class="row g-0">
 
         {# Partie gauche : image zoomée #}
@@ -25,7 +25,7 @@
                 <div class="product-text-block">
                     <h1 class="gg-product-title">{{ product.name }}</h1>
 
-                    <p class="gg-product-price">{{ product.price|number_format(2, '.', ' ') }} €</p>
+                    <p class="gg-product-price">{{ product.price|number_format(2, '.', ' ') }}€</p>
 
                     <div class="gg-product-label">Description</div>
 
@@ -35,16 +35,44 @@
                 </div>
 
                 <div class="mt-auto">
-                    <button class="btn btn-secondary w-100 product-btn">
-                        Ajouter au panier
-                    </button>
-                </div>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 
+                        <a href="{{ path('app_login') }}" class="btn btn-secondary w-100 product-btn">
+                            Se connecter
+                        </a>
+                    {% else %}
+                        {% set cart = app.session.get('cart', {}) %}
+                        {% set currentQty = cart[product.id] ?? 1 %}
+
+                        <div class="d-flex flex-column gap-2">
+
+                            <label for="quantity" class="fw-bold">Quantité :</label>
+
+                            <form action="{{ path('app_cart_add', {id: product.id}) }}" 
+                                method="post">
+
+                                <input 
+                                    type="number" 
+                                    id="quantity"
+                                    name="quantity" 
+                                    min="0" 
+                                    value="{{ currentQty }}" 
+                                    class="form-control mb-3"
+                                    style="max-width:120px;"
+                                >
+
+                                <button class="btn btn-secondary product-btn"
+                                        style="width:465px; height:77px;">
+                                    {{ cart[product.id] is defined ? 'Mettre à jour' : 'Ajouter au panier' }}
+                                </button>
+
+                            </form>
+
+                        </div>
+                    {% endif %}                    
+                </div>
             </div>
         </div>
-
     </div>
 </section>
-
-
 {% endblock %}

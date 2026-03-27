@@ -462,7 +462,7 @@ p.card-text {
     margin-right: 20px;
 }
 
-/* Titre Connexion : espace équivalent titre + sous-titre de register */
+/* Titre Connexion */
 .login-title {
     font-weight: 500;
     font-size: 20px;
@@ -487,6 +487,12 @@ p.card-text {
     font-family: Inter, sans-serif;
     font-size: 14px;
 }
+
+/* ---------------PANIER GreenGoodies--------------------- */
+/* Structure générale */
+.cart-wrapper {
+    background: #F7F1EC;
+    height: 734px;}
 
 /*----------------FOOTER GreenGoodies (Base)------------*/
 .footer-right {
