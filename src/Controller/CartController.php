@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,12 +32,32 @@ final class CartController extends AbstractController
 
         return $this->redirectToRoute('app_cart');
     }
+    
     #[Route('/cart', name: 'app_cart')]
-    public function index(Request $request): Response
+    public function index(Request $request, ProductRepository $productRepository): Response
     {
         $cart = $request->getSession()->get('cart', []);
+        
+        // Récupération des produits avec leurs quantités
+        $cartItems = [];
+        $total = 0;
+        
+        foreach ($cart as $productId => $quantity) {
+            $product = $productRepository->find($productId);
+            if ($product) {
+                $subtotal = $product->getPrice() * $quantity;
+                $cartItems[] = [
+                    'product' => $product,
+                    'quantity' => $quantity,
+                    'subtotal' => $subtotal,
+                ];
+                $total += $subtotal;
+            }
+        }
+        
         return $this->render('cart/index.html.twig', [
-            'cart' => $cart,
+            'cartItems' => $cartItems,
+            'total' => $total,
         ]);
     }
 
