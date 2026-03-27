@@ -7,25 +7,37 @@
 <section class="cart-section d-flex align-items-center">
     <div class="row g-0">
         <h1>Mon panier</h1>
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('images/products/placeholder.jpg') }}" class="img-fluid rounded-start" alt="Nom du produit">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Nom du produit</h5>
-                        <p class="card-text"><small class="text-muted">Quantité: 1</small></p>
-                        <p class="card-text">0.00 €</p>                        
+        
+        {% if cartItems is empty %}
+            <p>Votre panier est vide.</p>
+        {% else %}
+            {% for item in cartItems %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ asset('images/products/' ~ item.product.picture) }}" 
+                                 class="img-fluid rounded-start" 
+                                 alt="{{ item.product.name }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.product.name }}</h5>
+                                <p class="card-text"><small class="text-muted">Quantité: {{ item.quantity }}</small></p>
+                                <p class="card-text">Prix unitaire: {{ item.product.price|number_format(2, ',', ' ') }} €</p>
+                                <p class="card-text"><strong>Prix total: {{ item.subtotal|number_format(2, ',', ' ') }} €</strong></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            {% endfor %}
+            
+            <div class="cart-total">
+                <h2>Total: {{ total|number_format(2, ',', ' ') }} €</h2>
+                <p class="card-text"><small class="text-muted">Frais de livraison: Offert</small></p>
             </div>
-        </div>
-        <div class="cart-total">
-            <h2>Total: 0.00 €</h2>
-            <p class="card-text"><small class="text-muted">Frais de livraison: Offert</small></p>
-        </div>
+            
             <button class="btn btn-secondary w-100 product-btn">Valider la commande</button>
+        {% endif %}
     </div>
 </section>
 {% endblock %}
