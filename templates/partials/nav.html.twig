@@ -16,7 +16,7 @@
             <ul class="navbar-nav gap-4">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}#nos-produits" data-turbo="false">Nos produits</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Mon panier</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_cart') }}">Mon panier</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Mon compte</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
                 {% else %}

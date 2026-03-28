@@ -294,6 +294,9 @@ p.card-text {
     font-weight: 400;
     background-color: #565656;
     border-color: #565656;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-btn:hover {
@@ -489,10 +492,134 @@ p.card-text {
 }
 
 /* ---------------PANIER GreenGoodies--------------------- */
-/* Structure générale */
-.cart-wrapper {
+/* SECTION */
+.cart-section {
     background: #F7F1EC;
-    height: 734px;}
+    min-height: 734px;
+}
+
+/* TITRE */
+.cart-title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #333333;
+    margin-top: 102px;
+}
+
+/* LIEN "VIDER LE PANIER" */
+.cart-clear-link {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    text-decoration: none;
+}
+
+.cart-clear-link:hover {
+    text-decoration: underline;
+    color: #333333;
+}
+
+/* CONTENEUR LISTE PRODUITS */
+.cart-items-container {
+    width: 604px;
+}
+
+/* CARD PRODUIT */
+.cart-product-card {
+    width: 604px;
+    height: 220px;
+    background: white;
+    border-radius: 0;
+}
+
+.cart-product-img {
+    width: 142px;
+    height: 132.71px;
+    object-fit: cover;
+    margin-left: 27px;
+}
+
+.cart-product-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: black;
+}
+
+.cart-product-qty {
+    font-weight: 400;
+    font-size: 14px;
+    color: #666666;
+}
+
+.cart-product-price {
+    font-weight: 500;
+    font-size: 18px;
+    color: #333333;
+}
+
+.cart-product-text {
+    padding-left: 40px;
+}
+
+/* CARD TOTAL */
+.cart-total-card {
+    width: 604px;
+    height: 81px; /* Hauteur exacte Figma */
+    background: white;
+    border-radius: 0;
+}
+
+/* Wrapper interne : flex vertical + alignement à droite */
+.cart-total-wrapper {
+    height: 100%;
+    width: 100%;
+    padding: 0 20px; /* léger padding horizontal Figma */
+}
+
+.cart-total-padding {
+    padding-right: 45px !important;
+}
+
+/* Textes */
+.cart-total-label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333333;
+}
+
+.cart-total-amount {
+    font-weight: 400;
+    font-size: 20px;
+    color: #333333;
+}
+
+.cart-delivery {
+    font-weight: 400;
+    font-size: 12px;
+    color: #666666;
+    margin-top: 2px; 
+}
+
+.cart-delivery-spacing {
+    margin-top: -4px !important;
+}
+
+/* BOUTON VALIDER */
+.cart-btn {
+    width: 465px;
+    height: 77px;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #565656;
+    color: white;
+}
+
+.cart-btn:hover {
+    background-color: #000000;
+    color: white;
+}
+
 
 /*----------------FOOTER GreenGoodies (Base)------------*/
 .footer-right {
