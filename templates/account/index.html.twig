@@ -26,7 +26,7 @@
                         {% else %}
                             {% for order in orders %}
                                 <tr>
-                                    <th scope="row">{{ order.id|number_format(0, '', '') }}</th>
+                                    <th scope="row">{{ order.id < 10 ? '0' ~ order.id : order.id }}</th>
                                     <td>{{ order.createdAt|date('d/m/Y') }}</td>
                                     <td>{{ order.totalPrice|number_format(2, ',', ' ') }}€</td>
                                 </tr>
