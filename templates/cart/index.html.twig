@@ -18,7 +18,7 @@
                 </a>
 
                 {% for item in cartItems %}
-                    <div class="card cart-product-card border-0 mt-2">
+                    <div class="card cart-product-card border-0 mx-auto">
                         <div class="row g-0 h-100">
 
                             <div class="col-auto d-flex align-items-center justify-content-center pt-3 ps-3 pb-4">
@@ -56,10 +56,13 @@
                 </div>
 
                 <!-- Bouton Valider -->
-                <div class="d-flex flex-column align-items-center">
-                    <button class="btn btn-secondary cart-btn mt-3">
-                        Valider la commande
-                    </button>
+                <div class="d-flex flex-column align-items-center mt-2">
+                    <form action="{{ path('app_cart_validate') }}" method="post" class="m-0">
+                        <input type="hidden" name="_token" value="{{ csrf_token('cart_validate') }}">
+                        <button type="submit" class="btn btn-secondary cart-btn mt-3">
+                            Valider la commande
+                        </button>
+                    </form>
                 </div>
 
             </div>

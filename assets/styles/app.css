@@ -380,7 +380,6 @@ p.card-text {
     margin-bottom: 18px;
 }
 
-/* Espacement entre les champs (+10px par rapport au mb-3 Bootstrap) */
 .form-container .mb-3 {
     margin-bottom: 26px !important; /* 16px (mb-3) + 10px */
 }
@@ -397,7 +396,7 @@ p.card-text {
     height: 67px !important; 
     background: #FFFDF7 !important;
     border: 1px solid #666666 !important;
-    border-radius: 0 !important; /* PAS DE BORDER RADIUS */
+    border-radius: 0 !important; 
     padding: 0 14px !important;
     font-size: 14px;
 }
@@ -512,6 +511,7 @@ p.card-text {
     font-weight: 400;
     color: #666666;
     text-decoration: none;
+    margin-bottom: 10px;
 }
 
 .cart-clear-link:hover {
@@ -564,8 +564,8 @@ p.card-text {
 /* CARD TOTAL */
 .cart-total-card {
     width: 604px;
-    height: 81px; /* Hauteur exacte Figma */
-    background: white;
+    height: 81px; 
+    background: rgba(255, 253, 247, 0.7);
     border-radius: 0;
 }
 
@@ -573,7 +573,7 @@ p.card-text {
 .cart-total-wrapper {
     height: 100%;
     width: 100%;
-    padding: 0 20px; /* léger padding horizontal Figma */
+    padding: 0 20px; 
 }
 
 .cart-total-padding {
@@ -613,6 +613,7 @@ p.card-text {
     font-weight: 400;
     background-color: #565656;
     color: white;
+    margin-bottom: 200px;
 }
 
 .cart-btn:hover {
@@ -620,10 +621,82 @@ p.card-text {
     color: white;
 }
 
+/* ---------------MON COMPTE GreenGoodies--------------------- */
+/* SECTION */
+.account-section {
+    background: #F7F1EC;
+    
+}
+
+.account-product-card {
+    width: 604px;
+    min-height: 244px;
+    background: #FFFDF7;
+    border-radius: 0;
+}
+
+/* TITRE PRINCIPAL */
+.account-title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #333333;
+}
+
+/* TITRE "MES COMMANDES" */
+.account-orders-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000000;
+}
+
+/* TABLEAU */
+.account-table {
+    width: 485px;
+    margin: 0 auto;
+    table-layout: fixed;
+}
+/*
+.account-table th:first-child,
+.account-table td:first-child {
+    width: 15%;
+}
+
+.account-table th:nth-child(2),
+.account-table td:nth-child(2) {
+    width: 60%;
+    text-align: center !important;
+}
+
+.account-table th:last-child,
+.account-table td:last-child {
+    width: 35%;
+    text-align: right;
+}
+*/
+/* En-têtes de tableau (thead) */
+.account-table thead th {
+    font-weight: 400;
+    font-size: 14px;
+    color: #666666;
+}
+
+/* Corps du tableau (tbody - toutes les cellules) */
+.account-table tbody th,
+.account-table tbody td {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333333;
+}
 
 /*----------------FOOTER GreenGoodies (Base)------------*/
+footer {
+    height: 81px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 .footer-right {
-    padding-right: 100px;
+    padding-right: 90px;
     font-size: 14px;
     color: #666666;
 }

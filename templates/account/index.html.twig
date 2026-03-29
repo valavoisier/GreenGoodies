@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - GreenGoodies{% endblock %}
+
+{% block body %}
+<section class="account-section d-flex justify-content-center">
+    <div class="container d-flex flex-column align-items-center">
+        <!-- Titre -->
+        <h1 class="account-title text-center mt-5 mb-4">Mon compte</h1>      
+        <div class="card account-product-card border-0 mt-3 p-4">
+            <h2 class="account-orders-title mb-3">Mes commandes</h2>
+            <div class="row g-0">
+                <table class="table account-table"> 
+                    <thead>
+                        <tr>                        
+                        <th scope="col">N°</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row">01</th>
+                        <td>01/01/2024</td>
+                        <td>100,50€</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">02</th>
+                        <td>02/01/2024</td>
+                        <td>150,75€</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">03</th>
+                        <td>03/01/2024</td>
+                        <td>200,00€</td>
+                        </tr>
+                    </tbody>
+                </table>               
+            </div>
+        </div>             
+        <!-- Bouton Activer API -->
+        <div class="card account-product-card border-0 mt-2 p-4">
+            <h2 class="account-orders-title mb-3">Mon accès API</h2>
+            <div class="d-flex flex-column align-items-center">
+                <button class="btn btn-secondary cart-btn mt-3">
+                    Activer mon accès API
+                </button>
+            </div>
+        </div>
+        <!-- Bouton supprimer compte -->
+        <div class="card account-product-card border-0 mt-2 p-4">
+            <div class="d-flex flex-column align-items-center">
+                <button class="btn btn-secondary cart-btn mt-3">
+                    Supprimer mon compte
+                </button>
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+{% endblock %}
+
