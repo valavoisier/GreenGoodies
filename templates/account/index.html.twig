@@ -19,21 +19,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row">01</th>
-                        <td>01/01/2024</td>
-                        <td>100,50€</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">02</th>
-                        <td>02/01/2024</td>
-                        <td>150,75€</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">03</th>
-                        <td>03/01/2024</td>
-                        <td>200,00€</td>
-                        </tr>
+                        {% if orders is empty %}
+                            <tr>
+                                <td colspan="3" class="text-center">Aucune commande pour le moment.</td>
+                            </tr>
+                        {% else %}
+                            {% for order in orders %}
+                                <tr>
+                                    <th scope="row">{{ order.id|number_format(0, '', '') }}</th>
+                                    <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                                    <td>{{ order.totalPrice|number_format(2, ',', ' ') }}€</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>               
             </div>
