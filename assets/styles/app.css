@@ -110,47 +110,47 @@ a {
     color: #333333;    
     margin: 35px 0 35px 95px;    
 }
-.card {
+.products .card {
     border-radius: 0;
     border: none;    
 }
 
-img.card-img-top {
+.products img.card-img-top {
     width: 480px;
     height: 474px;
     object-fit: cover;
     object-position: center;
     border-radius: 0;
 }
-h3.card-title {
+.products h3.card-title {
     font-weight: 600;
     font-size: 16px;
     color: #000000;
     margin-top: 22px;
 }
 
-p.card-text {
+.products p.card-text {
     font-weight: 400;
     font-size: 14px;
     color: #666666;
     margin-top: 5px;
 }
 
-.card .card-text small.gg-price {
+.products .card-text small.gg-price {
     color: #333333;
     font-weight: 400;
     font-size: 14px;
 }
 
 /* Taille totale de la card */
-.card {
+.products .card {
     height: 692px;
     display: flex;
     flex-direction: column;
 }
 
 /* Footer de la card */
-.card .card-footer {
+.products .card .card-footer {
     height: 77px;  
     background-color: #FFFDF7; 
     display: flex;
@@ -162,7 +162,7 @@ p.card-text {
 }
 
 /* Lien dans le footer */
-.card .card-footer a.gg-card-link {
+.products .card .card-footer a.gg-card-link {
     font-weight: 400;
     font-size: 14px;
     color: #000000;
@@ -170,10 +170,10 @@ p.card-text {
 }
 
 /* Effet hover sur la div footer */
-.card .card-footer:hover {
+.products .card .card-footer:hover {
     background-color: #333333;
 }
-.card .card-footer:hover a.gg-card-link {
+.products .card .card-footer:hover a.gg-card-link {
     color: #ffffff;
 }
 /*___________SECTION VALEURS_____________*/
@@ -628,13 +628,43 @@ p.card-text {
     
 }
 
+/* CARD GÉNÉRIQUE */
 .account-product-card {
     width: 604px;
-    min-height: 244px;
+    height: auto;
     background: #FFFDF7;
     border-radius: 0;
 }
 
+/* CARD MES COMMANDES */
+.account-orders-card {
+    min-height: 197px;
+    padding: 24px;
+}
+
+/* CARD API */
+.account-api-card {
+    height: 244px;
+    padding: 24px;
+}
+
+/* CARD SUPPRIMER COMPTE */
+.account-delete-card {
+    height: 197px;
+    padding: 24px;
+    margin-bottom: 80px;
+}
+/* Titre*/
+.account-api-card h2 {
+    margin: 35px 0 30px 35px; 
+}
+
+/* Bouton centré horizontalement */
+.account-api-card .cart-btn,
+.account-delete-card .cart-btn {
+    display: block;
+    margin: 0 auto;
+}
 /* TITRE PRINCIPAL */
 .account-title {
     font-weight: 500;
@@ -647,46 +677,57 @@ p.card-text {
     font-weight: 600;
     font-size: 14px;
     color: #000000;
+    margin: 35px 0 30px 35px;
 }
 
-/* TABLEAU */
+/*___________ TABLEAU_________ */
 .account-table {
-    width: 485px;
+    max-width: 485px;
     margin: 0 auto;
     table-layout: fixed;
 }
-/*
-.account-table th:first-child,
-.account-table td:first-child {
-    width: 15%;
-}
 
-.account-table th:nth-child(2),
-.account-table td:nth-child(2) {
-    width: 60%;
-    text-align: center !important;
-}
-
-.account-table th:last-child,
-.account-table td:last-child {
-    width: 35%;
-    text-align: right;
-}
-*/
 /* En-têtes de tableau (thead) */
 .account-table thead th {
     font-weight: 400;
     font-size: 14px;
     color: #666666;
+    border-bottom: none;
 }
 
-/* Corps du tableau (tbody - toutes les cellules) */
+/* Corps du tableau */
 .account-table tbody th,
 .account-table tbody td {
     font-weight: 500;
     font-size: 14px;
     color: #333333;
+    background: none;
+    padding-top: 16px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid #CCCCCC;
 }
+
+/* Supprimer la bordure sous la dernière ligne */
+.account-table tbody tr:last-child th,
+.account-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+
+/* Colonne Date légèrement décalée*/
+.account-table tbody td:nth-child(2),
+.account-table thead th:nth-child(2) {
+    padding-left: 20px;
+}
+
+/* Colonne Prix vers la droite (mais texte à gauche)*/ 
+.account-table tbody td:nth-child(3),
+.account-table thead th:nth-child(3) {
+    padding-left: 105px;
+}
+
+
 
 /*----------------FOOTER GreenGoodies (Base)------------*/
 footer {
