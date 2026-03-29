@@ -2,14 +2,13 @@ html{
     scroll-behavior: smooth;
 }
 body {
-    background-color: black;
+    background-color: #FFFDF7;
     font-family: "Inter", sans-serif;
 }
 .container-1440 {
     max-width: 1440px;
     width: 100%;
-    margin: 0 auto;
-    background-color: #FFFDF7;
+    margin: 0 auto;    
 }
 
 a {
