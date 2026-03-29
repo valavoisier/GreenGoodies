@@ -114,6 +114,9 @@ final class CartController extends AbstractController
         // Vider le panier
         $request->getSession()->remove('cart');
         
+        // Message de confirmation
+        $this->addFlash('success', 'Votre commande a été validée avec succès !');
+        
         return $this->redirectToRoute('app_cart');
     }
     
