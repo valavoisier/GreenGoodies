@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\SecurityBundle\Security;
 
 final class AccountController extends AbstractController
 {
@@ -30,5 +33,33 @@ final class AccountController extends AbstractController
         return $this->render('account/index.html.twig', [
             'orders' => $ordersArray,
         ]);
+    }
+    
+    #[Route('/account/delete', name: 'app_account_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function delete(Request $request, EntityManagerInterface $em, Security $security): Response
+    {
+        // Vérification du token CSRF
+        $token = $request->request->get('_token');
+        if (!$this->isCsrfTokenValid('account_delete', $token)) {
+            throw $this->createAccessDeniedException('Token CSRF invalide');
+        }
+        
+        // Récupération de l'utilisateur connecté
+        $user = $this->getUser();
+        
+        // Supprimer toutes les commandes de l'utilisateur
+        foreach ($user->getOrders() as $order) {
+            $em->remove($order);
+        }
+        
+        // Supprimer l'utilisateur
+        $em->remove($user);
+        $em->flush();
+        
+        // Déconnecter l'utilisateur
+        $security->logout(false);
+        
+        return $this->redirectToRoute('app_home');
     }
 }

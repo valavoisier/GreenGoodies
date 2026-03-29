@@ -48,9 +48,12 @@
         <!-- Bouton supprimer compte -->
         <div class="card account-product-card border-0 mt-2 p-4">
             <div class="d-flex flex-column align-items-center">
-                <button class="btn btn-secondary cart-btn mt-3">
-                    Supprimer mon compte
-                </button>
+                <form action="{{ path('app_account_delete') }}" method="post" class="m-0" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('account_delete') }}">
+                    <button type="submit" class="btn btn-secondary cart-btn mt-3">
+                        Supprimer mon compte
+                    </button>
+                </form>
             </div>
         </div>
         
