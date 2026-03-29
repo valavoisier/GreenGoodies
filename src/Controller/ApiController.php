@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,5 +42,22 @@ final class ApiController extends AbstractController
         $token = $jwtManager->create($user);
 
         return $this->json(['token' => $token], Response::HTTP_OK);
+    }
+
+    #[Route('/api/products', name: 'api_products', methods: ['GET'])]
+    public function products(ProductRepository $productRepository): JsonResponse
+    {
+        $products = $productRepository->findAll();
+
+        $data = array_map(fn($p) => [
+            'id'               => $p->getId(),
+            'name'             => $p->getName(),
+            'shortDescription' => $p->getShortDescription(),
+            'fullDescription'  => $p->getFullDescription(),
+            'price'            => $p->getPrice(),
+            'picture'          => $p->getPicture(),
+        ], $products);
+
+        return $this->json($data, Response::HTTP_OK);
     }
 }
