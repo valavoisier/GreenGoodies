@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,7 @@ final class AccountController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(): Response
     {
-        // Récupération de l'utilisateur connecté
+        /** @var User $user */
         $user = $this->getUser();
         
         // Récupération des commandes de l'utilisateur
@@ -35,6 +36,22 @@ final class AccountController extends AbstractController
         ]);
     }
     
+    #[Route('/account/api-toggle', name: 'app_account_api_toggle', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function toggleApi(Request $request, EntityManagerInterface $em): Response
+    {
+        if (!$this->isCsrfTokenValid('api_toggle', $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Token CSRF invalide.');
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setApiAccess(!$user->isApiAccess());
+        $em->flush();
+
+        return $this->redirectToRoute('app_account');
+    }
+
     #[Route('/account/delete', name: 'app_account_delete', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function delete(Request $request, EntityManagerInterface $em, Security $security): Response
@@ -46,6 +63,7 @@ final class AccountController extends AbstractController
         }
         
         // Récupération de l'utilisateur connecté
+        /** @var User $user */  //évite pb reconnaissance getOrders() par l'IDE
         $user = $this->getUser();
         
         // Supprimer toutes les commandes de l'utilisateur

@@ -37,13 +37,20 @@
             </div>
         </div> 
                 
-        <!-- Bouton Activer API -->
+        <!-- Bouton Activer/Désactiver API -->
         <div class="card account-product-card account-api-card border-0 mt-2">
             <h2 class="account-orders-title">Mon accès API</h2>
 
-            <button class="btn btn-secondary cart-btn">
-                Activer mon accès API
-            </button>
+            <form action="{{ path('app_account_api_toggle') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('api_toggle') }}">
+                <button type="submit" class="btn btn-secondary cart-btn">
+                    {% if app.user.apiAccess %}
+                        Désactiver mon accès API
+                    {% else %}
+                        Activer mon accès API
+                    {% endif %}
+                </button>
+            </form>
         </div>
         <!-- Bouton supprimer compte -->
         <div class="card account-product-card account-delete-card border-0 mt-2 d-flex justify-content-center align-items-center">
