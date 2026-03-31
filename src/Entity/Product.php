@@ -1,4 +1,15 @@
 <?php
+/**
+ * Entité représentant un produit du catalogue.
+ *
+ * Elle contient les informations essentielles d’un produit :
+ * - nom
+ * - descriptions (courte et complète)
+ * - prix
+ * - image
+ * 
+ * L’entité est mappée à la table SQL `product`.
+ */
 
 namespace App\Entity;
 

@@ -1,4 +1,15 @@
 <?php
+/**
+ * Entité représentant une commande passée par un utilisateur.
+ *
+ * Cette classe stocke :
+ * - l’identifiant unique de la commande
+ * - la date de création (immutable pour garantir l’intégrité)
+ * - le prix total de la commande
+ * - l’utilisateur ayant passé la commande
+ *
+ * L’entité est mappée à la table SQL `order`.
+ */
 
 namespace App\Entity;
 

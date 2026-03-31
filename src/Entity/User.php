@@ -1,4 +1,15 @@
 <?php
+/**
+ * Entité représentant un utilisateur de l’application.
+ *
+ * Elle contient les informations essentielles d’un compte utilisateur :
+ * - identité (nom, prénom)
+ * - email et mot de passe
+ * - rôles et accès API
+ * - commandes associées
+ *
+ * L’entité est mappée à la table SQL `user`.
+ */
 
 namespace App\Entity;
 
