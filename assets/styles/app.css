@@ -197,11 +197,24 @@ a {
 }
 
 /* ZONE TEXTE*/
+/* titres de section */
+.section-title {
+    font-size: 20px;
+    font-weight: 500;
+    color:#333333;
+}
+
+/* paragraphes */
+.values-text-block p {
+    font-weight: 300;         
+    font-size: 14px;
+    color:#333333;
+}
+
 .values-text-block {
     width: 465px;    
 }
 
-/* marge faible selon le côté */
 .values-text-left {
     margin-left: 40px;
     margin-bottom: 20px;
@@ -236,22 +249,9 @@ a {
     overflow: hidden; /* empêche l’image zoomée de déborder */
 }
 
-/* TITRES DE SECTION */
-.section-title {
-    font-size: 20px;
-    font-weight: 500;
-    color:#333333;
-}
-
-/* PARAGRAPHES*/
-.values-text-block p {
-    font-weight: 300;         
-    font-size: 14px;
-    color:#333333;
-}
 /* ---------------PRODUCT PAGE GreenGoodies--------------------- */
 .product-section {
-    padding-bottom: 221px; /* 907px (zone content) - 686px (photo/texte) */
+    padding-bottom: 221px; 
 }
 
 /* Colonne gauche */
@@ -363,7 +363,7 @@ a {
 
 /* Bloc formulaire */
 .form-container {
-    width: 479px; /* largeur exacte Figma */
+    width: 479px; 
 }
 
 /* Titres */
@@ -490,13 +490,13 @@ a {
 }
 
 /* ---------------PANIER GreenGoodies--------------------- */
-/* SECTION */
+/* section */
 .cart-section {
     background: #F7F1EC;
     min-height: 734px;
 }
 
-/* TITRE */
+/* titre */
 .cart-title {
     font-weight: 500;
     font-size: 20px;
@@ -504,7 +504,7 @@ a {
     margin-top: 102px;
 }
 
-/* LIEN "VIDER LE PANIER" */
+/* lien "vider le panier" */
 .cart-clear-link {
     font-size: 14px;
     font-weight: 400;
@@ -518,12 +518,12 @@ a {
     color: #333333;
 }
 
-/* CONTENEUR LISTE PRODUITS */
+/* conteneur liste produits */
 .cart-items-container {
     width: 604px;
 }
 
-/* CARD PRODUIT */
+/* card produit */
 .cart-product-card {
     width: 604px;
     height: 220px;
@@ -560,7 +560,7 @@ a {
     padding-left: 40px;
 }
 
-/* CARD TOTAL */
+/* card total */
 .cart-total-card {
     width: 604px;
     height: 81px; 
@@ -568,7 +568,7 @@ a {
     border-radius: 0;
 }
 
-/* Wrapper interne : flex vertical + alignement à droite */
+/* Wrapper interne*/
 .cart-total-wrapper {
     height: 100%;
     width: 100%;
@@ -603,7 +603,7 @@ a {
     margin-top: -4px !important;
 }
 
-/* BOUTON VALIDER */
+/* bouton valider */
 .cart-btn {
     width: 465px;
     height: 77px;
@@ -621,13 +621,13 @@ a {
 }
 
 /* ---------------MON COMPTE GreenGoodies--------------------- */
-/* SECTION */
+/* section */
 .account-section {
     background: #F7F1EC;
     
 }
 
-/* CARD GÉNÉRIQUE */
+/* card générique */
 .account-product-card {
     width: 604px;
     height: auto;
@@ -636,43 +636,43 @@ a {
     margin-bottom: 8px;
 }
 
-/* CARD MES COMMANDES */
+/* card mes commandes */
 .account-orders-card {
     min-height: 197px;
     padding: 24px;
 }
 
-/* CARD API */
+/* card API */
 .account-api-card {
     height: 244px;
     padding: 24px;
 }
 
-/* CARD SUPPRIMER COMPTE */
+/* card supprimer compte */
 .account-delete-card {
     height: 197px;
     padding: 24px;
     margin-bottom: 80px;
 }
-/* Titre*/
+/* titre */
 .account-api-card h2 {
     margin: 35px 0 30px 35px; 
 }
 
-/* Bouton centré horizontalement */
+/* bouton centré horizontalement */
 .account-api-card .cart-btn,
 .account-delete-card .cart-btn {
     display: block;
     margin: 0 auto;
 }
-/* TITRE PRINCIPAL */
+/* titre principal */
 .account-title {
     font-weight: 500;
     font-size: 20px;
     color: #333333;
 }
 
-/* TITRE "MES COMMANDES" */
+/* titre "MES COMMANDES" */
 .account-orders-title {
     font-weight: 600;
     font-size: 14px;
@@ -713,21 +713,17 @@ a {
     border-bottom: none;
 }
 
-
-
-/* Colonne Date légèrement décalée*/
+/* colonne date légèrement décalée*/
 .account-table tbody td:nth-child(2),
 .account-table thead th:nth-child(2) {
     padding-left: 20px;
 }
 
-/* Colonne Prix vers la droite (mais texte à gauche)*/ 
+/* colonne prix vers la droite (mais texte à gauche)*/ 
 .account-table tbody td:nth-child(3),
 .account-table thead th:nth-child(3) {
     padding-left: 105px;
 }
-
-
 
 /*----------------FOOTER GreenGoodies (Base)------------*/
 footer {

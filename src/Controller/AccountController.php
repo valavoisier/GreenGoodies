@@ -52,7 +52,7 @@ final class AccountController extends AbstractController
         // Conversion en tableau php pour tri avec usort()
         $ordersArray = $orders->toArray();
         
-        // Tri des commandespar date décroissante (plus récentes en premier)
+        // Tri des commandes par date décroissante (plus récentes en premier)
         usort($ordersArray, function($a, $b) {
             return $b->getCreatedAt() <=> $a->getCreatedAt();
         });

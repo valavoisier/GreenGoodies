@@ -16,8 +16,29 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
+/**
+ * Formulaire d’inscription utilisateur.
+ *
+ * Ce formulaire gère :
+ * - les informations personnelles (nom, prénom, email)
+ * - la saisie du mot de passe en clair (non mappé à l’entité)
+ * - la validation de la politique de mot de passe
+ * - l’acceptation des CGU
+ *
+ * Le mot de passe n’est volontairement pas mappé à l’entité User :
+ * il est récupéré dans le contrôleur, haché, puis stocké dans la propriété password.
+ */
 class RegistrationFormType extends AbstractType
 {
+    /**
+     * Construction du formulaire d’inscription.
+     *
+     * Chaque champ est configuré avec :
+     * - un type (TextType, EmailType, PasswordType…)
+     * - un label
+     * - des contraintes de validation si nécessaire
+     * - l’option mapped=false pour les champs non liés à l’entité User
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -36,8 +57,8 @@ class RegistrationFormType extends AbstractType
             
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                // au lieu d'être défini directement sur l'objet,
-                // cela est lu et encodé dans le contrôleur
+                //mapped false: Le mot de passe n’est pas directement lié à l’entité User.
+                // Il sera récupéré dans le contrôleur, haché, puis stocké dans password.
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'invalid_message' => 'Les mots de passe doivent être identiques.',
@@ -57,7 +78,7 @@ class RegistrationFormType extends AbstractType
                     ),
                 ],
             ])
-            // CASE CGU
+            // CASE CGU(mapped false: non lié à entity user, juste une validation de checkbox)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -71,6 +92,10 @@ class RegistrationFormType extends AbstractType
         ;
     }
 
+    /**
+     * Configuration du form type :
+     * - data_class indique que le formulaire hydrate un objet User
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
