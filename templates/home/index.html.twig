@@ -33,29 +33,32 @@
     {# SECTION PRODUITS #}
     <section class="products">
         <h2 id="nos-produits" class="section-title">NOS PRODUITS</h2>
-        {# CARDS PRODUITS — 3 lignes de 3 cards #}
-        <!-- La fonction batch regroupe les card-group par ligne de 3 -->
-        {% for row in products|batch(3) %}
-            <div class="card-group">
-                {% for product in row %}
-                    <div class="card">
-                        <!-- Product image-->
-                        <img src="{{ asset('images/products/' ~ product.picture) }}" class="card-img-top" alt="{{ product.name }}">
+        <div class="row g-0">
+            {% for product in products %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card flex-fill">
+                        <img src="{{ asset('images/products/' ~ product.picture) }}" 
+                            class="card-img-top" 
+                            alt="{{ product.name }}">
                         <div class="card-body text-center">
-                            <!-- Product name-->
                             <h3 class="card-title">{{ product.name }}</h3>
-                            <!-- Product description-->
                             <p class="card-text">{{ product.shortDescription }}</p>
-                            <!-- Product price-->
-                            <p class="card-text"><small class="gg-price">{{ product.price|number_format(2, '.', ' ') }}€</small></p>
+                            <p class="card-text">
+                                <small class="gg-price">
+                                    {{ product.price|number_format(2, '.', ' ') }}€
+                                </small>
+                            </p>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="{{ path('app_product_show', {'id': product.id}) }}" class="gg-card-link">Voir le produit</a>
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}" 
+                            class="gg-card-link">
+                            Voir le produit
+                            </a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
     </section>
 
     {# SECTION VALEURS #}
@@ -76,14 +79,11 @@
                 </div>
             </div>
         </div>
-
         {# BLOC 2 — NOS VALEURS #}
         <div class="values-block bg-green d-flex">
             <div class="col-6 d-flex justify-content-start">
                 <div class="values-img-wrapper">
-                    <img src="{{ asset('images/valeurs.webp') }}" 
-                        alt="Nos valeurs" 
-                        class="values-img-left">
+                    <img src="{{ asset('images/valeurs.webp') }}" alt="Nos valeurs" class="values-img-left">                     
                 </div>
             </div>
             <div class="col-6 d-flex align-items-end justify-content-end">

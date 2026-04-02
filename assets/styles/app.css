@@ -70,7 +70,6 @@ a {
 }
 
 .hero-title {
-    font-family: "Inter", sans-serif;
     font-weight: 500;
     font-size: 64px;
     line-height: 100%;
@@ -79,7 +78,6 @@ a {
 }
 
 .hero-text {
-    font-family: "Inter", sans-serif;
     font-weight: 300;
     font-size: 18px;
     line-height: 100%;
@@ -109,9 +107,14 @@ a {
     color: #333333;    
     margin: 35px 0 35px 95px;    
 }
+
+/* Taille totale de la card */
 .products .card {
+    height: 692px;
+    display: flex;
+    flex-direction: column;
     border-radius: 0;
-    border: none;    
+    border: none;
 }
 
 .products img.card-img-top {
@@ -139,13 +142,6 @@ a {
     color: #333333;
     font-weight: 400;
     font-size: 14px;
-}
-
-/* Taille totale de la card */
-.products .card {
-    height: 692px;
-    display: flex;
-    flex-direction: column;
 }
 
 /* Footer de la card */
@@ -665,6 +661,13 @@ a {
     display: block;
     margin: 0 auto;
 }
+.account-delete-card form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* pour centrer verticalement */
+}
+
 /* titre principal */
 .account-title {
     font-weight: 500;
@@ -736,4 +739,409 @@ footer {
     padding-right: 90px;
     font-size: 14px;
     color: #666666;
+}
+/*-----------------------------RESPONSIVE-----------------------------*/
+@media (max-width: 992px) {
+
+    /* ── NAV ── */
+    .nav-gg {
+        height: auto;
+        padding: 14px 0;
+    }
+
+    /* ── HERO ── */
+    .hero-section {
+        height: auto;
+    }
+    
+    .hero-section .row {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .hero-left,
+    .hero-right {
+        flex: none;
+        width: 100%;
+    }
+
+    .hero-left {
+        padding: 60px 32px 40px;
+        justify-content: flex-start !important;
+    }
+
+    .hero-text-block {
+        width: 100%;
+        height: auto;
+    }
+
+    .hero-title {
+        font-size: 48px;
+    }
+
+    .hero-right.hero-image-wrapper {
+        height: 50vw;
+    }
+
+    .hero-img {
+        height: 100%;
+        object-position: center;
+        transform: none;
+    }
+
+    /* ── PRODUITS ── */
+    .products .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .products .section-title {
+        margin: 28px 0 28px 24px;
+    }
+
+    .products img.card-img-top {
+        width: 100%;
+        height: 280px;
+    }
+
+    .products .card {
+        height: auto;
+    }
+
+    /* ── VALEURS ── */
+    .values-section {
+        height: auto;
+    }
+
+    .values-block {
+        height: auto;
+        flex-direction: column !important;
+    }
+
+    /* Bloc 1 — image à droite : on l'inverse en colonne */
+    .values-block .col-6 {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100%;
+    }
+
+    .values-img-wrapper {
+        width: 100%;
+        height: 320px;
+    }
+
+    .values-img-right,
+    .values-img-left {
+        width: 100%;
+        height: 320px;
+        transform: none;
+    }
+
+    .values-text-block {
+        width: 100%;
+        padding: 40px 32px;
+    }
+
+    .values-text-left,
+    .values-text-right {
+        margin: 0;
+        max-width: 100%;
+    }
+
+    /* Bloc 2 — image à gauche : on remonte l'image au-dessus du texte */
+    .bg-green.values-block {
+        flex-direction: column-reverse !important;
+    }
+
+    /* ── FICHE PRODUIT ── */
+    .product-section {
+        padding-bottom: 80px;
+    }
+
+    .product-left,
+    .product-img-wrapper {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+
+    .product-img {
+        height: auto;
+        object-fit: contain;
+    }
+
+    .product-right {
+        width: 100%;
+        height: auto;
+        padding: 0 32px 40px;
+    }
+
+    .product-text-block {
+        margin-top: 40px;
+    }
+
+    /* ── REGISTER / LOGIN ── */
+    .register-left,
+    .login-left {
+        display: none; /* on masque l'image déco sur tablette */
+    }
+
+    .register-right,
+    .login-right {
+        padding: 60px 40px;
+        justify-content: center;
+    }
+
+    .form-container,
+    .login-form-container {
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    /* ── PANIER ── */
+    .cart-title {
+        margin-top: 48px;
+    }
+
+    .cart-items-container,
+    .cart-product-card,
+    .cart-total-card {
+        width: 100%;
+    }
+
+     .cart-btn {
+        width: 80%;
+        display: block;
+        margin: 0 auto 60px; 
+    }
+    
+    form {
+        width: 100%;
+    }
+    
+    /* ── MON COMPTE ── */
+    .account-product-card {
+        width: 100%;
+    }
+
+    .account-api-card {
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    .account-delete-card {
+        height: auto;
+        padding-bottom: 30px;
+        margin-bottom: 60px;
+    }
+
+    .account-api-card h2 {
+        margin: 24px 0 20px 0;
+    }
+
+    .account-orders-title {
+        margin: 24px 0 20px 0;
+    }
+
+    .account-table {
+        max-width: 100%;
+    }
+
+    .account-table tbody td:nth-child(3),
+    .account-table thead th:nth-child(3) {
+        padding-left: 20px;
+    }
+
+    .account-api-card .cart-btn,
+    .account-delete-card .cart-btn {
+        width: 100%;
+    }
+
+    /* ── FOOTER ── */
+    .footer-right {
+        padding-right: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* ── NAV ── */
+    .nav-gg {
+        padding: 12px 0;
+    }
+
+    /* ── HERO ── */
+    .hero-left {
+        padding: 40px 20px 32px;
+    }
+
+    .hero-title {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .hero-text {
+        font-size: 15px;
+    }
+
+    .hero-right.hero-image-wrapper {
+        height: 60vw;
+    }
+
+    .hero-img {
+        height: 100%;
+        object-position: center;
+        transform: none;
+    }
+
+    /* ── PRODUITS ── */
+    .products .col-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .products .section-title {
+        margin: 20px 0 20px 16px;
+    }
+
+    .products img.card-img-top {
+        height: 320px;
+    }
+
+    /* ── VALEURS ── */
+    .values-img-wrapper {
+        height: 240px;
+    }
+
+    .values-img-right,
+    .values-img-left {
+        height: 240px;
+    }
+
+    .values-text-block {
+        padding: 28px 20px;
+    }
+
+    .section-title {
+        font-size: 16px;
+    }
+
+    /* ── FICHE PRODUIT ── */
+    .product-left,
+    .product-img-wrapper {
+        height: auto;
+        overflow: visible;
+    }
+
+    .product-img {
+        height: auto;
+        object-fit: contain;
+    }
+
+    .product-right {
+        padding: 0 20px 40px;
+    }
+
+    .product-text-block {
+        margin-top: 28px;
+    }
+
+    .gg-product-title {
+        font-size: 17px;
+    }
+
+    .gg-product-price {
+        font-size: 24px;
+        margin-bottom: 28px;
+    }
+
+    .product-btn {
+        height: 60px;
+    }
+
+    /* ── REGISTER / LOGIN ── */
+    .register-right,
+    .login-right {
+        padding: 40px 20px;
+    }
+
+    .form-container input:not([type="checkbox"]) {
+        height: 54px !important;
+    }
+
+    .btn-register {
+        height: 60px;
+        margin-top: 14px;
+    }
+
+    /* ── PANIER ── */
+    .cart-title {
+        margin-top: 32px;
+        font-size: 17px;
+    }
+
+    .cart-product-card {
+        height: auto;
+        padding: 16px 0;
+    }
+
+    .cart-product-img {
+        width: 90px;
+        height: 90px;
+        margin-left: 16px;
+    }
+
+    .cart-product-text {
+        padding-left: 16px;
+    }
+
+    .cart-product-price {
+        font-size: 15px;
+    }
+
+    .cart-total-card {
+        height: auto;
+        padding: 16px 20px;
+    }
+
+    .cart-total-amount {
+        font-size: 16px;
+    }
+
+    .cart-btn {
+        height: 60px;
+        margin-bottom: 40px;
+    }
+
+    /* ── MON COMPTE ── */
+    .account-orders-card,
+    .account-api-card,
+    .account-delete-card {
+        padding: 16px;
+    }
+
+    .account-table thead th,
+    .account-table tbody td {
+        font-size: 12px;
+        padding-top: 12px;
+        padding-bottom: 16px;
+    }
+
+    .account-table tbody td:nth-child(2),
+    .account-table thead th:nth-child(2) {
+        padding-left: 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+        height: auto;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .footer-right {
+        padding-right: 0;
+        text-align: center;
+    }
 }

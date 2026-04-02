@@ -18,7 +18,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
-#[ORM\Table(name: '`order`')]
+#[ORM\Table(name: '`order`')]// Le nom de la table est entouré de backticks pour éviter les conflits avec le mot-clé SQL "ORDER".
 class Order
 {
     #[ORM\Id]
