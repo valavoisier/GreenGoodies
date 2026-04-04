@@ -11,15 +11,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class ApiController extends AbstractController
 {
     /**
-     * Cette méthode permet d’obtenir un token JWT pour accéder aux routes protégées de l’API.
+     * Authentifie un utilisateur et génère un token JWT.
      *
      * Méthode : POST  
      * URL     : /api/login  
-     * Accès   : Public (mais nécessite un compte avec accès API activé)
+     * Accès   : Public (compte requis + accès API activé)
      *
      * Processus :
      * - Lecture du JSON envoyé par le client
@@ -27,21 +28,23 @@ final class ApiController extends AbstractController
      * - Vérification que l’accès API est activé pour cet utilisateur
      * - Génération d’un token JWT via LexikJWTAuthenticationBundle
      *
-     * Exemple de requête :
+     * Corps attendu (JSON) :
      * {
      *   "username": "email@example.com",
      *   "password": "monMotDePasse"
      * }
      *
-     * Exemple de réponse :
+     * Codes de réponse :
+     * - 200 : Token généré
      * {
      *   "token": "eyJhbGciOi..."
      * }
-     *
-     * Codes de réponse :
-     * - 200 : Token généré
      * - 401 : Identifiants manquants ou incorrects
      * - 403 : Accès API désactivé
+     * 
+     * Notes :
+     * - Le token JWT doit être envoyé dans l’en-tête :
+     *   Authorization: Bearer <token>
      */    
     #[Route('/api/login', name: 'api_login', methods: ['POST'])]
     public function login(
@@ -87,16 +90,17 @@ final class ApiController extends AbstractController
     }
 
     /**
-     * Cette méthode permet de récupérer la liste complète des produits.
+     * Retourne la liste des produits du catalogue.
      *
      * Méthode : GET  
      * URL     : /api/products  
      * Accès   : Protégé (JWT obligatoire)
      *
-     * Le client doit fournir un token valide dans l’en-tête :
+     * En-tête requis :
      * Authorization: Bearer <token>
-     *
-     * Exemple de réponse :
+     *     
+     * Codes de réponse :
+     * - 200 : Succès
      * [
      *   {
      *     "id": 1,
@@ -107,30 +111,20 @@ final class ApiController extends AbstractController
      *     "picture": "image.jpg"
      *   }
      * ]
-     *
-     * Codes de réponse :
-     * - 200 : Succès
      * - 401 : Token manquant ou invalide
      */
     #[Route('/api/products', name: 'api_products', methods: ['GET'])]
-    public function products(ProductRepository $productRepository): JsonResponse
+    public function products(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
     {
         // Récupération de tous les produits en base.
         // findAll() renvoie un tableau d’entités Product.
         $products = $productRepository->findAll();
+        // Sérialisation des entités Product en JSON via le Serializer Symfony.
+        // Le groupe 'product:read' détermine les propriétés exposées (définies dans l'entité).
+        $json = $serializer->serialize($products, 'json', ['groups' => ['product:read']]);
 
-        // Transformation des entités Product en tableaux scalaires.
-        // Cela garantit une sérialisation propre et évite les proxies Doctrine.
-        $data = array_map(fn($p) => [
-            'id'               => $p->getId(),
-            'name'             => $p->getName(),
-            'shortDescription' => $p->getShortDescription(),
-            'fullDescription'  => $p->getFullDescription(),
-            'price'            => $p->getPrice(),
-            'picture'          => $p->getPicture(),
-        ], $products);
-        
-        // Retour de la liste des produits au format JSON.
-        return $this->json($data, Response::HTTP_OK);
+        // Retour de la réponse JSON avec le contenu déjà sérialisé.
+        // Le 4e paramètre (true) indique que $json est déjà encodé → pas de double encodage.
+        return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
 }

@@ -35,6 +35,7 @@ le site propose:
 - **Doctrine ORM 3** + MariaDB 10.4
 - **Twig 3** + Bootstrap 5.3 (CDN)
 - **LexikJWTAuthenticationBundle** — authentification API
+- **Symfony Serializer** — sérialisation des entités en JSON (groupes de sérialisation)
 ---
 
 ## Installation
@@ -117,7 +118,7 @@ templates/
 
 **User** — email, prénom, nom, mot de passe haché, rôles, `apiAccess` (booléen activable depuis le compte).
 
-**Product** — nom, description courte (homepage), description longue (fiche produit), prix, image.
+**Product** — nom, description courte (homepage), description longue (fiche produit), prix, image. Les propriétés exposées via l'API sont annotées `#[Groups(['product:read'])]` — seuls ces champs sont sérialisés et retournés par `/api/products`.
 
 **Order** — date de création, prix total, relation vers User. La table SQL est nommée `` `order` `` (mot réservé SQL, protégé par backticks dans l'annotation Doctrine).
 
@@ -222,6 +223,9 @@ Réponses : `200` + token JWT / `401` identifiants incorrects / `403` accès API
 ```
 Authorization: Bearer <token>
 ```
+
+**Sérialisation :** Les produits sont exposés via le groupe `product:read`, 
+ce qui garantit que seules les propriétés prévues pour l’API sont retournées.
 
 **Réponse en cas de succès (200) :**
 
