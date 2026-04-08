@@ -725,7 +725,7 @@ a {
 /* colonne prix vers la droite (mais texte à gauche)*/ 
 .account-table tbody td:nth-child(3),
 .account-table thead th:nth-child(3) {
-    padding-left: 105px;
+    padding-left: 104px;
 }
 
 /*----------------FOOTER GreenGoodies (Base)------------*/

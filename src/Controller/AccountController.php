@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * Contrôleur responsable de la gestion de l’espace personnel utilisateur.
@@ -30,36 +31,26 @@ use Symfony\Bundle\SecurityBundle\Security;
 final class AccountController extends AbstractController
 {
     /**
-     * Affiche la liste des commandes de l’utilisateur connecté.
+     * Affiche la liste des commandes de l'utilisateur connecté.
      *
      * Fonctionnement :
-     * - Récupère l’utilisateur connecté via getUser()
-     * - Récupère ses commandes (Collection Doctrine)
-     * - Convertit la Collection en tableau pour permettre un tri PHP
-     * - Trie les commandes par date décroissante (plus récentes en premier)
+     * - Récupère l'utilisateur connecté via getUser()
+     * - Délègue la requête et le tri à OrderRepository (SQL ORDER BY)
      * - Affiche la page Twig correspondante
      */
     #[Route('/account', name: 'app_account')]
     #[IsGranted('ROLE_USER')]
-    public function index(): Response
+    public function index(OrderRepository $orderRepository): Response
     {
         /** @var User $user */
-        $user = $this->getUser();// Récupération de l’utilisateur connecté.
-        
-        // Récupération des commandes de l'utilisateur
-        $orders = $user->getOrders();
-        
-        // Conversion en tableau php pour tri avec usort()
-        $ordersArray = $orders->toArray();
-        
-        // Tri des commandes par date décroissante (plus récentes en premier)
-        usort($ordersArray, function($a, $b) {
-            return $b->getCreatedAt() <=> $a->getCreatedAt();
-        });
-        
-        // Affichage de la page du compte avec les commandes triées.
+        $user = $this->getUser();
+
+        // Récupère les commandes triées par date décroissante 
+        // Le tri SQL dans OrderRepository (ORDER BY createdAt DESC).
+        $orders = $orderRepository->findByUserOrderedByDate($user);
+
         return $this->render('account/index.html.twig', [
-            'orders' => $ordersArray,
+            'orders' => $orders,
         ]);
     }
 
@@ -100,9 +91,9 @@ final class AccountController extends AbstractController
      * Fonctionnement :
      * - Vérifie le token CSRF pour sécuriser la requête
      * - Récupère l’utilisateur connecté via getUser()
-     * - Supprime toutes les commandes de l’utilisateur
-     * - Supprime l’utilisateur lui-même
-     * - Déconnecte l’utilisateur
+     * - Supprime l’utilisateur (les commandes sont supprimées automatiquement
+     *   grâce au mapping cascade: ['remove'] + orphanRemoval: true)
+     * - Nettoie le contexte de sécurité avec logout(false)
      * - Redirige vers la page d’accueil
      */
     #[Route('/account/delete', name: 'app_account_delete', methods: ['POST'])]
@@ -119,16 +110,15 @@ final class AccountController extends AbstractController
         /** @var User $user */  //évite pb reconnaissance getOrders() par l'IDE
         $user = $this->getUser();
         
-        // Supprime toutes les commandes de l'utilisateur
-        foreach ($user->getOrders() as $order) {
-            $em->remove($order);
-        }
-        
-        // Supprime l'utilisateur lui-même en base de données       
+        // Supprime l'utilisateur.
+        // Doctrine supprime automatiquement les Order associés
+        // grâce au cascade: ['remove'] + orphanRemoval: true définis dans l'entité User
         $em->remove($user);
         $em->flush();
         
         // Déconnexion de l'utilisateur
+        // Nettoyage du contexte de sécurité.
+        // logout(false) évite d’invalider le token CSRF encore actif dans la requête.
         $security->logout(false);
 
         // Redirection vers la page d’accueil après suppression du compte.

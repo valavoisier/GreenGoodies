@@ -101,6 +101,7 @@ final class CartController extends AbstractController
         foreach ($cart as $productId => $quantity) {
             // Récupération du produit correspondant.
             $product = $productRepository->find($productId);
+            // if ($product) protège contre un produit supprimé entre temps 
             if ($product) {
                 // Calcul du sous‑total pour ce produit.
                 $subtotal = $product->getPrice() * $quantity;
