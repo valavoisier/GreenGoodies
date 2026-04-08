@@ -15,6 +15,7 @@ Site e-commerce de produits écologiques et éthiques, développée avec **Symfo
 - [Sécurité & Authentification](#sécurité--authentification)
 - [API REST](#api-rest)
 - [Gestion du panier](#gestion-du-panier)
+- [Espace personnel](#espace-personnel)
 - [Fixtures](#fixtures)
 
 ---
@@ -96,7 +97,7 @@ src/
 ├── Form/
 │   └── RegistrationFormType.php   # Formulaire d'inscription
 ├── Repository/
-│   ├── OrderRepository.php
+│   ├── OrderRepository.php        # findByUserOrderedByDate() — tri SQL
 │   ├── ProductRepository.php
 │   └── UserRepository.php
 └── DataFixtures/
@@ -116,11 +117,11 @@ templates/
 
 ## Entités
 
-**User** — email, prénom, nom, mot de passe haché, rôles, `apiAccess` (booléen activable depuis le compte).
+**User** — email, prénom, nom, mot de passe haché, rôles, `apiAccess` (booléen activable depuis le compte). La relation `OneToMany` vers `Order` est configurée avec `cascade: ['remove']` et `orphanRemoval: true` — la suppression d'un `User` entraîne automatiquement la suppression de toutes ses commandes.
 
 **Product** — nom, description courte (homepage), description longue (fiche produit), prix, image. Les propriétés exposées via l'API sont annotées `#[Groups(['product:read'])]` — seuls ces champs sont sérialisés et retournés par `/api/products`.
 
-**Order** — date de création, prix total, relation vers User. La table SQL est nommée `` `order` `` (mot réservé SQL, protégé par backticks dans l'annotation Doctrine).
+**Order** — date de création, prix total, relation vers `User` (`ManyToOne`, `nullable: false`). La table SQL est nommée `` `order` `` (mot réservé SQL, protégé par backticks dans l'annotation Doctrine).
 
 ---
 
@@ -299,6 +300,18 @@ Copier la valeur du champ `token` dans la réponse.
 
 Le panier est stocké en session PHP sous la forme `[ productId => quantity ]`. 
 À la validation, une entité `Order` est créée en base avec le total calculé, puis le panier est vidé.
+
+---
+
+## Espace personnel
+
+L’espace personnel (`/account`) regroupe trois fonctionnalités :
+
+**Tableau des commandes** — les commandes sont récupérées via `OrderRepository::findByUserOrderedByDate()`, une requête DQL qui filtre par utilisateur et trie par date décroissante côté SQL (`ORDER BY createdAt DESC`).
+
+**Accès API** — le bouton active ou désactive le booléen `apiAccess` sur l’entité `User` (POST `account/api-toggle`, protégé par CSRF). Sans ce booléen à `true`, l’endpoint `/api/login` retourne `403 Forbidden` même avec des identifiants valides.
+
+**Suppression de compte** — la suppression du `User` déclenche automatiquement la suppression des `Order` associés grâce à `cascade: ['remove']` + `orphanRemoval: true` définis sur la relation `User::$orders`. Après le `flush()`, `$security->logout(false)` nettoie la session.
 
 ---
 
