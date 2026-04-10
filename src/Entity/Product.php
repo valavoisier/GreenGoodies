@@ -33,9 +33,9 @@ class Product
     #[Groups(['product:read'])]
     private ?string $fullDescription = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     #[Groups(['product:read'])]
-    private ?float $price = null;
+    private ?string $price = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['product:read'])]
@@ -82,12 +82,12 @@ class Product
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): static
+    public function setPrice(string $price): static
     {
         $this->price = $price;
 
