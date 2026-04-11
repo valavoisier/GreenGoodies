@@ -132,7 +132,7 @@ templates/
 ### Pages publiques — accessibles sans connexion :
 
 - `GET /` — page d'accueil
-- `GET /produits/{id}` — fiche produit
+- `GET /products/{id}` — fiche produit
 - `GET|POST /login` — connexion
 - `GET|POST /register` — inscription
 - `GET /logout` — déconnexion

@@ -30,7 +30,7 @@ final class ProductController extends AbstractController
      * - Si le produit existe, il est injecté directement dans $product
      * - La vue Twig reçoit l’objet complet pour l’affichage
      */
-     #[Route('/produits/{id}', name: 'app_product_show', requirements: ['id' => '\d+'])]//(regex de 0 à 9)
+     #[Route('/products/{id}', name: 'app_product_show', requirements: ['id' => '\d+'])]//(regex de 0 à 9)
     public function show(Product $product): Response
     {
         return $this->render('product/show.html.twig', [
