@@ -55,6 +55,8 @@ final class CartController extends AbstractController
 
         // Récupération du panier stocké en session
         // Structure : [ productId => quantity ]
+        // clé 'cart' : nom choisi pour stocker le panier en session
+        // get('cart', []) : si la clé 'cart' n’existe pas, retourne un tableau vide par défaut
         $cart = $request->getSession()->get('cart', []);
 
         if ($quantity > 0) {

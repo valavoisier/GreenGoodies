@@ -76,7 +76,9 @@ final class AccountController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();// Récupération de l’utilisateur connecté.
 
-        // Inversion de l’état d’accès API (activation ↔ désactivation).
+        // Inversion de l’état d’accès API (activation ↔ désactivation)
+        // isApiAccess renvoie true ou false / ! inverse le valeur.
+        // setApiAccess enregistre la nouvelle valeur dans l'objet $user
         $user->setApiAccess(!$user->isApiAccess());
         // Sauvegarde de la modification en base.
         $em->flush();
