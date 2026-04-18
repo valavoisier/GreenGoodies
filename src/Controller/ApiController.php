@@ -12,6 +12,22 @@ use Symfony\Component\Serializer\SerializerInterface;
 final class ApiController extends AbstractController
 {
     /**
+     * Point d'entrée de l'authentification API.
+     *
+     * Cette méthode ne s'exécute jamais — elle existe uniquement pour que le
+     * routeur Symfony puisse résoudre /api/login. Le firewall `json_login`
+     * intercepte la requête avant d'atteindre ce contrôleur.
+     *
+     * @see config/packages/security.yaml  (json_login / success_handler)
+     * @see App\Security\ApiAuthenticationSuccessHandler
+     */
+    #[Route('/api/login', name: 'api_login', methods: ['POST'])]
+    public function login(): never
+    {
+        throw new \LogicException('Intercepté par le firewall json_login.');
+    }
+
+    /**
      * Retourne la liste des produits du catalogue.
      *
      * Méthode : GET  
