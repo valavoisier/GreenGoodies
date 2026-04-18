@@ -94,6 +94,8 @@ src/
 │   └── User.php                   # Utilisateur
 ├── EventListener/
 │   └── ApiExceptionListener.php   # Réponses JSON sur erreurs API
+├── Security/
+│   └── ApiAuthenticationSuccessHandler.php  # Vérification apiAccess après authentification
 ├── Form/
 │   └── RegistrationFormType.php   # Formulaire d'inscription
 ├── Repository/
@@ -157,7 +159,7 @@ La sécurité est configurée dans `config/packages/security.yaml`.
 
 Deux firewalls distincts dans `security.yaml` :
 
-- **`api`** — stateless, JWT, couvre toutes les routes `/api`
+- **`api`** — stateless, JWT, `json_login` sur `/api/login`, couvre toutes les routes `/api`
 - **`main`** — form login avec session, couvre le reste du site
 
 ### Contrôle d'accès
@@ -182,16 +184,17 @@ L'algorithme `auto` est utilisé en production.
 
 ## API REST
 
-L'API REST est accessible sous le préfixe `/api`. Elle utilise **JSON Web Tokens (JWT)** pour l'authentification, via le bundle `lexik/jwt-authentication-bundle`.
+L'API REST est accessible sous le prefixe `/api`. Elle utilise **JSON Web Tokens (JWT)** pour l'authentification, via le bundle `lexik/jwt-authentication-bundle`.
 
-L'accès API doit être activé manuellement depuis `/account`.
+L'acces API doit etre active manuellement depuis `/account`.
+
 ---
 
-### `POST /api/login` — Obtenir un token JWT
+### `POST /api/login` - Obtenir un token JWT
 
-**Accès :** Public
+**Acces :** Public
 
-**Corps de la requête (JSON) :**
+**Corps de la requete (JSON) :**
 
 ```json
 {
@@ -200,7 +203,7 @@ L'accès API doit être activé manuellement depuis `/account`.
 }
 ```
 
-**Réponse en cas de succès (200) :**
+**Reponse en cas de succes (200) :**
 
 ```json
 {
@@ -208,18 +211,17 @@ L'accès API doit être activé manuellement depuis `/account`.
 }
 ```
 
-**Codes de réponse :**
+Reponses : `200` + token JWT / `401` identifiants incorrects / `403` acces API non active.
 
-Réponses : `200` + token JWT / `401` identifiants incorrects / `403` accès API non activé.
-
+> L'endpoint `/api/login` est intercepte par le firewall avant d'atteindre un controleur - la verification du flag `apiAccess` est deleguee a `ApiAuthenticationSuccessHandler`.
 
 ---
 
-### `GET /api/products` — Lister les produits
+### `GET /api/products` - Lister les produits
 
-**Accès :** Protégé — token JWT obligatoire
+**Acces :** Protege - token JWT obligatoire
 
-**En-tête requis :**
+**En-tete requis :**
 
 ```
 Authorization: Bearer <token>
@@ -269,32 +271,15 @@ Le listener `ApiExceptionListener` intercepte toutes les exceptions déclenchée
 
 ---
 
-### Exemple d'utilisation complet (Postman)
+### Exemple d'utilisation (Postman)
 
 **1. Obtenir un token JWT**
-
-- Méthode : `POST`
-- URL : `http://localhost:8000/api/login`
-- Onglet **Body** → `raw` → `JSON`
-
-```json
-{
-  "username": "user@example.com",
-  "password": "monMotDePasse"
-}
-```
-
-Copier la valeur du champ `token` dans la réponse.
-
----
+- Methode : `POST` - URL : `http://localhost:8000/api/login`
+- Body raw JSON : `{ "username": "user@example.com", "password": "monMotDePasse" }`
 
 **2. Consommer l'API avec le token**
-
-- Méthode : `GET`
-- URL : `http://localhost:8000/api/products`
-- Onglet **Authorization** → Type : `Bearer Token` → coller le token dans le champ **Token**
-
----
+- Methode : `GET` - URL : `http://localhost:8000/api/products`
+- Authorization Bearer Token : coller le token
 
 ## Gestion du panier
 
@@ -309,7 +294,7 @@ L’espace personnel (`/account`) regroupe trois fonctionnalités :
 
 **Tableau des commandes** — les commandes sont récupérées via `OrderRepository::findByUserOrderedByDate()`, une requête DQL qui filtre par utilisateur et trie par date décroissante côté SQL (`ORDER BY createdAt DESC`).
 
-**Accès API** — le bouton active ou désactive le booléen `apiAccess` sur l’entité `User` (POST `account/api-toggle`, protégé par CSRF). Sans ce booléen à `true`, l’endpoint `/api/login` retourne `403 Forbidden` même avec des identifiants valides.
+**Accès API** — le bouton active ou désactive le booléen `apiAccess` sur l'entité `User` (POST `account/api-toggle`, protégé par CSRF). Sans ce booléen à `true`, `ApiAuthenticationSuccessHandler` retourne `403 Forbidden` avant que Lexik génère le token.
 
 **Suppression de compte** — la suppression du `User` déclenche automatiquement la suppression des `Order` associés grâce à `cascade: ['remove']` + `orphanRemoval: true` définis sur la relation `User::$orders`. Après le `flush()`, `$security->logout(false)` nettoie la session.
 
